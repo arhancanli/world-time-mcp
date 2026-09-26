@@ -208,9 +208,9 @@ off, and some holidays move.
 - [Drug Label](https://github.com/arhancanli/drug-label-mcp): FDA drug label answers with section citations, RxNorm name resolution, recalls and shortages.
 - [End of Life](https://github.com/arhancanli/end-of-life-mcp): Is this version still supported? EOL dates, latest patch and upgrade target for 470+ products.
 - [Internet Standards](https://github.com/arhancanli/internet-standards-mcp): RFC sections, status, obsoleted-by chains, errata and IANA registries for coding agents.
+- [License Check](https://github.com/arhancanli/license-check-mcp): Open source license answers: SPDX ids, copyleft, and whether a dependency's license fits yours.
 - [Package Truth](https://github.com/arhancanli/package-truth-mcp): Checks packages exist before install: version, deprecation, vulnerabilities, licence. 7 ecosystems.
-- [Recall Check](https://github.com/arhancanli/recall-check-mcp): One recall check across CPSC, FDA and NHTSA: match by name, model number, UPC or VIN.
-- [The whole collection](https://github.com/arhancanli/mcp-factory#servers), 3 more
+- [The whole collection](https://github.com/arhancanli/mcp-factory#servers), 4 more
 <!-- family:end -->
 
 ## License
