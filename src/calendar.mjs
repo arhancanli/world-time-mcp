@@ -18,7 +18,7 @@ const COUNTRY_NAMES = index.getCountries("en");
 const fold = (s) =>
   String(s ?? "")
     .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
+    .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, " ")
     .trim();

@@ -202,6 +202,7 @@ off, and some holidays move.
 ## More MCP servers by Arhan Canli
 
 <!-- family:start -->
+- [Web Reader](https://github.com/arhancanli/web-reader-mcp): Reads web pages and PDFs as clean Markdown: main content, the sections that answer a query.
 - [Citation Check](https://github.com/arhancanli/citation-check-mcp): Verifies citations: finds fabricated or mismatched references and retractions, returns clean BibTeX.
 - [Domain Health](https://github.com/arhancanli/domain-health-mcp): Email and domain checks: SPF lookup limits, DKIM keys, DMARC, DNS records, registration expiry.
 - [Drug Label](https://github.com/arhancanli/drug-label-mcp): FDA drug label answers with section citations, RxNorm name resolution, recalls and shortages.
@@ -209,8 +210,7 @@ off, and some holidays move.
 - [Internet Standards](https://github.com/arhancanli/internet-standards-mcp): RFC sections, status, obsoleted-by chains, errata and IANA registries for coding agents.
 - [Package Truth](https://github.com/arhancanli/package-truth-mcp): Checks packages exist before install: version, deprecation, vulnerabilities, licence. 7 ecosystems.
 - [Recall Check](https://github.com/arhancanli/recall-check-mcp): One recall check across CPSC, FDA and NHTSA: match by name, model number, UPC or VIN.
-- [Satellite Imagery](https://github.com/arhancanli/satellite-imagery-mcp): Find the clearest Sentinel-2, Landsat, Sentinel-1 or NAIP scene for any place, with band links.
-- [The whole collection](https://github.com/arhancanli/mcp-factory#servers), 1 more
+- [The whole collection](https://github.com/arhancanli/mcp-factory#servers), 2 more
 <!-- family:end -->
 
 ## License
