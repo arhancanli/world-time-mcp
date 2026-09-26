@@ -210,7 +210,7 @@ off, and some holidays move.
 - [Internet Standards](https://github.com/arhancanli/internet-standards-mcp): RFC sections, status, obsoleted-by chains, errata and IANA registries for coding agents.
 - [Package Truth](https://github.com/arhancanli/package-truth-mcp): Checks packages exist before install: version, deprecation, vulnerabilities, licence. 7 ecosystems.
 - [Recall Check](https://github.com/arhancanli/recall-check-mcp): One recall check across CPSC, FDA and NHTSA: match by name, model number, UPC or VIN.
-- [The whole collection](https://github.com/arhancanli/mcp-factory#servers), 2 more
+- [The whole collection](https://github.com/arhancanli/mcp-factory#servers), 3 more
 <!-- family:end -->
 
 ## License
