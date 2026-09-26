@@ -1,0 +1,22 @@
+{
+  "competitor": {
+    "label": "mcp-server-time, the official reference time server",
+    "command": "uvx",
+    "args": ["mcp-server-time"]
+  },
+  "tasks": [
+    { "id": "tokyo-ny", "prompt": "When it is 09:00 on 2026-10-15 in Tokyo, what time is it in New York? Give HH:MM in 24-hour time.", "expect": { "regex": "^\\W*20:00\\W*$" } },
+    { "id": "dst-gap-weeks", "prompt": "A call is set for 10:00 New York time on 2026-03-16. What time is that in London? Give HH:MM in 24-hour time.", "expect": { "regex": "^\\W*14:00\\W*$" } },
+    { "id": "skipped-time", "prompt": "Does the local time 02:30 on 2026-03-08 exist in New York? Answer yes or no.", "expect": { "regex": "^\\W*no\\b" } },
+    { "id": "kathmandu", "prompt": "What is Kathmandu's UTC offset? Give it as +HH:MM.", "expect": { "contains": ["+05:45"] } },
+    { "id": "new-year-auckland", "prompt": "When it is 18:00 on 2026-12-31 in Los Angeles, what is the date and time in Auckland? Give YYYY-MM-DD HH:MM.", "expect": { "contains": ["2027-01-01 15:00"] } },
+    { "id": "uk-dst-end", "prompt": "On what date does daylight saving time end in the United Kingdom in 2026? Give YYYY-MM-DD.", "expect": { "contains": ["2026-10-25"] } },
+    { "id": "bavaria-holiday", "prompt": "Is 2026-01-06 a public holiday in Bavaria, Germany? Answer yes or no.", "expect": { "regex": "^\\W*yes\\b" } },
+    { "id": "england-business", "prompt": "In England, what date is 10 business days after 2026-12-18, skipping weekends and bank holidays? Give YYYY-MM-DD.", "expect": { "contains": ["2027-01-06"] } },
+    { "id": "us-december", "prompt": "How many business days (Monday to Friday, excluding US federal public holidays) are there in December 2026 in the United States? Give the number only.", "expect": { "number": 22 } },
+    { "id": "weekday", "prompt": "What day of the week is 2027-03-14? Give the day name only.", "expect": { "regex": "^\\W*sunday\\W*$" } },
+    { "id": "iso-week", "prompt": "What is the ISO 8601 week number of 2027-01-01? Give the number only.", "expect": { "number": 53 } },
+    { "id": "month-end", "prompt": "What date is one calendar month after 2027-01-31, clamping to the end of the month? Give YYYY-MM-DD.", "expect": { "contains": ["2027-02-28"] } },
+    { "id": "meeting", "prompt": "On 2026-12-22, people in New York (09:00-17:00 local), London (08:00-18:00 local) and Berlin (09:00-17:00 local) need a 60-minute meeting inside everyone's hours. What is the earliest start time in UTC? Give HH:MM.", "expect": { "regex": "^\\W*14:00\\W*" } }
+  ]
+}

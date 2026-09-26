@@ -1,0 +1,64 @@
+{
+  "measured_on": "2026-09-26",
+  "where": "Dubai, home connection",
+  "node": "v24.19.0",
+  "runs": 5,
+  "tool_definition_chars": 2924,
+  "tools_list_chars": 4632,
+  "competitor": {
+    "label": "mcp-server-time, the official reference time server",
+    "tool_definition_chars": 1002,
+    "tools_list_chars": 1208
+  },
+  "scenarios": [
+    {
+      "call": "world_time: now in 5 places (city, ambiguous city, country, abbreviation, offset)",
+      "first_call_ms": 7,
+      "repeat_ms": 1.5,
+      "result_chars": 1123
+    },
+    {
+      "call": "world_time: a time the spring-forward change skips",
+      "first_call_ms": 5,
+      "repeat_ms": 0.6,
+      "result_chars": 718
+    },
+    {
+      "call": "holidays: Saudi Arabia 2026 (multi-day Eid, estimated)",
+      "first_call_ms": 7,
+      "repeat_ms": 0.3,
+      "result_chars": 918
+    },
+    {
+      "call": "business_days: 5 business days in Saudi Arabia across Eid",
+      "first_call_ms": 7,
+      "repeat_ms": 0.2,
+      "result_chars": 450
+    },
+    {
+      "call": "meeting_slots: New York, London, Berlin over Christmas",
+      "first_call_ms": 27,
+      "repeat_ms": 8.2,
+      "result_chars": 400
+    },
+    {
+      "call": "date_info: Jan 31 plus one month, days to Christmas",
+      "first_call_ms": 2,
+      "repeat_ms": 0.2,
+      "result_chars": 269
+    }
+  ],
+  "example": {
+    "call": "world_time: a time the spring-forward change skips",
+    "tool": "world_time",
+    "arguments": {
+      "places": [
+        "London",
+        "Dubai"
+      ],
+      "time": "2026-03-08 02:30",
+      "from": "New York"
+    },
+    "result": "{\"utc\":\"2026-03-08 07:30\",\"from\":{\"place\":\"New York, US\",\"zone\":\"America/New_York\",\"date\":\"2026-03-08\",\"time\":\"03:30\",\"weekday\":\"Sunday\",\"utc_offset\":\"-04:00\",\"dst\":true,\"abbreviation\":\"EDT\"},\"status\":\"skipped\",\"note\":\"02:30 does not exist in New York, US on 2026-03-08: clocks jump forward past it. Converted 03:30, the time a clock shows at that moment.\",\"results\":[{\"place\":\"London, GB\",\"zone\":\"Europe/London\",\"date\":\"2026-03-08\",\"time\":\"07:30\",\"weekday\":\"Sunday\",\"utc_offset\":\"+00:00\",\"dst\":false,\"abbreviation\":\"GMT\",\"next_change\":\"2026-03-29 01:00 to +01:00\"},{\"place\":\"Dubai, AE\",\"zone\":\"Asia/Dubai\",\"date\":\"2026-03-08\",\"time\":\"11:30\",\"weekday\":\"Sunday\",\"utc_offset\":\"+04:00\",\"dst\":false,\"abbreviation\":\"GST\"}]}"
+  }
+}

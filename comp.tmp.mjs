@@ -1,0 +1,11 @@
+import { Client } from "@modelcontextprotocol/sdk/client/index.js";
+import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
+const t = new StdioClientTransport({ command: process.argv[2], args: process.argv.slice(3), stderr: "pipe" });
+const c = new Client({ name: "probe", version: "0" });
+await c.connect(t);
+const { tools } = await c.listTools();
+console.log(tools.length, "tools", JSON.stringify(tools.map((x) => ({ name: x.name, description: x.description, input_schema: x.inputSchema }))).length, "model-visible chars", JSON.stringify(tools).length, "full");
+console.log(tools.map((x) => x.name).join(", "));
+const r = await c.callTool({ name: "convert_time", arguments: { source_timezone: "America/New_York", time: "02:30", target_timezone: "Europe/London" } }).catch((e) => ({ err: String(e) }));
+console.log(JSON.stringify(r).slice(0, 400));
+await c.close();

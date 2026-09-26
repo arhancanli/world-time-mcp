@@ -1,0 +1,482 @@
+{
+  "date": "2026-09-26",
+  "model": "gpt-5.4-mini",
+  "competitor_label": "mcp-server-time, the official reference time server",
+  "rows": {
+    "ours": [
+      {
+        "id": "tokyo-ny",
+        "correct": true,
+        "answer": "20:00",
+        "tool_calls": 1,
+        "trace": [
+          {
+            "tool": "world_time",
+            "args": "{\"places\":[\"Tokyo\",\"New York\"],\"time\":\"2026-10-15 09:00\",\"from\":\"Tokyo\"}"
+          }
+        ],
+        "input": 1879,
+        "output": 47,
+        "cache_read": 0,
+        "cache_write": 0,
+        "ms": 2250
+      },
+      {
+        "id": "dst-gap-weeks",
+        "correct": true,
+        "answer": "14:00",
+        "tool_calls": 1,
+        "trace": [
+          {
+            "tool": "world_time",
+            "args": "{\"places\":[\"London\"],\"time\":\"2026-03-16 10:00\",\"from\":\"New York\"}"
+          }
+        ],
+        "input": 1837,
+        "output": 45,
+        "cache_read": 0,
+        "cache_write": 0,
+        "ms": 3483
+      },
+      {
+        "id": "skipped-time",
+        "correct": true,
+        "answer": "no",
+        "tool_calls": 1,
+        "trace": [
+          {
+            "tool": "world_time",
+            "args": "{\"places\":[\"New York\"],\"time\":\"2026-03-08 02:30\",\"from\":\"New York\"}"
+          }
+        ],
+        "input": 1866,
+        "output": 43,
+        "cache_read": 0,
+        "cache_write": 0,
+        "ms": 1950
+      },
+      {
+        "id": "kathmandu",
+        "correct": true,
+        "answer": "+05:45",
+        "tool_calls": 1,
+        "trace": [
+          {
+            "tool": "world_time",
+            "args": "{\"places\":[\"Kathmandu\"],\"time\":\"now\"}"
+          }
+        ],
+        "input": 1702,
+        "output": 32,
+        "cache_read": 0,
+        "cache_write": 0,
+        "ms": 2017
+      },
+      {
+        "id": "new-year-auckland",
+        "correct": true,
+        "answer": "2027-01-01 15:00",
+        "tool_calls": 1,
+        "trace": [
+          {
+            "tool": "world_time",
+            "args": "{\"places\":[\"Auckland\"],\"time\":\"2026-12-31 18:00\",\"from\":\"Los Angeles\"}"
+          }
+        ],
+        "input": 1844,
+        "output": 53,
+        "cache_read": 0,
+        "cache_write": 0,
+        "ms": 1937
+      },
+      {
+        "id": "uk-dst-end",
+        "correct": true,
+        "answer": "2026-10-25",
+        "tool_calls": 1,
+        "trace": [
+          {
+            "tool": "date_info",
+            "args": "{\"date\":\"2026-10-25\"}"
+          }
+        ],
+        "input": 1698,
+        "output": 34,
+        "cache_read": 0,
+        "cache_write": 0,
+        "ms": 1809
+      },
+      {
+        "id": "bavaria-holiday",
+        "correct": true,
+        "answer": "Yes",
+        "tool_calls": 1,
+        "trace": [
+          {
+            "tool": "holidays",
+            "args": "{\"where\":\"Bavaria, Germany\",\"date\":\"2026-01-06\",\"all\":true}"
+          }
+        ],
+        "input": 1782,
+        "output": 40,
+        "cache_read": 0,
+        "cache_write": 0,
+        "ms": 1763
+      },
+      {
+        "id": "england-business",
+        "correct": true,
+        "answer": "2027-01-06",
+        "tool_calls": 1,
+        "trace": [
+          {
+            "tool": "business_days",
+            "args": "{\"where\":\"England\",\"start\":\"2026-12-18\",\"add\":10}"
+          }
+        ],
+        "input": 1804,
+        "output": 42,
+        "cache_read": 0,
+        "cache_write": 0,
+        "ms": 1794
+      },
+      {
+        "id": "us-december",
+        "correct": true,
+        "answer": "22",
+        "tool_calls": 1,
+        "trace": [
+          {
+            "tool": "business_days",
+            "args": "{\"where\":\"United States\",\"start\":\"2026-12-01\",\"end\":\"2026-12-31\",\"weekend\":\"sat,sun\"}"
+          }
+        ],
+        "input": 1782,
+        "output": 50,
+        "cache_read": 0,
+        "cache_write": 0,
+        "ms": 1862
+      },
+      {
+        "id": "weekday",
+        "correct": true,
+        "answer": "Sunday",
+        "tool_calls": 1,
+        "trace": [
+          {
+            "tool": "date_info",
+            "args": "{\"date\":\"2027-03-14\"}"
+          }
+        ],
+        "input": 1694,
+        "output": 28,
+        "cache_read": 0,
+        "cache_write": 0,
+        "ms": 2319
+      },
+      {
+        "id": "iso-week",
+        "correct": true,
+        "answer": "53",
+        "tool_calls": 1,
+        "trace": [
+          {
+            "tool": "date_info",
+            "args": "{\"date\":\"2027-01-01\"}"
+          }
+        ],
+        "input": 1700,
+        "output": 31,
+        "cache_read": 0,
+        "cache_write": 0,
+        "ms": 1738
+      },
+      {
+        "id": "month-end",
+        "correct": true,
+        "answer": "2027-02-28",
+        "tool_calls": 1,
+        "trace": [
+          {
+            "tool": "date_info",
+            "args": "{\"date\":\"2027-01-31\",\"add\":\"+1 month\"}"
+          }
+        ],
+        "input": 1752,
+        "output": 39,
+        "cache_read": 0,
+        "cache_write": 0,
+        "ms": 2129
+      },
+      {
+        "id": "meeting",
+        "correct": true,
+        "answer": "14:00",
+        "tool_calls": 2,
+        "trace": [
+          {
+            "tool": "world_time",
+            "args": "{\"places\":[\"New York\",\"London\",\"Berlin\"],\"time\":\"2026-12-22 00:00\",\"from\":\"UTC\"}"
+          },
+          {
+            "tool": "world_time",
+            "args": "{\"places\":[\"New York\",\"London\",\"Berlin\"],\"time\":\"2026-12-22 17:00\",\"from\":\"UTC\"}"
+          }
+        ],
+        "input": 2388,
+        "output": 89,
+        "cache_read": 1152,
+        "cache_write": 0,
+        "ms": 2946
+      }
+    ],
+    "competitor": [
+      {
+        "id": "tokyo-ny",
+        "correct": true,
+        "answer": "20:00",
+        "tool_calls": 1,
+        "trace": [
+          {
+            "tool": "convert_time",
+            "args": "{\"source_timezone\":\"Asia/Tokyo\",\"time\":\"09:00\",\"target_timezone\":\"America/New_York\"}"
+          }
+        ],
+        "input": 877,
+        "output": 44,
+        "cache_read": 0,
+        "cache_write": 0,
+        "ms": 1922
+      },
+      {
+        "id": "dst-gap-weeks",
+        "correct": false,
+        "answer": "15:00",
+        "tool_calls": 1,
+        "trace": [
+          {
+            "tool": "convert_time",
+            "args": "{\"source_timezone\":\"America/New_York\",\"time\":\"10:00\",\"target_timezone\":\"Europe/London\"}"
+          }
+        ],
+        "input": 879,
+        "output": 43,
+        "cache_read": 0,
+        "cache_write": 0,
+        "ms": 1792
+      },
+      {
+        "id": "skipped-time",
+        "correct": true,
+        "answer": "No",
+        "tool_calls": 1,
+        "trace": [
+          {
+            "tool": "get_current_time",
+            "args": "{\"timezone\":\"America/New_York\"}"
+          }
+        ],
+        "input": 771,
+        "output": 30,
+        "cache_read": 0,
+        "cache_write": 0,
+        "ms": 1710
+      },
+      {
+        "id": "kathmandu",
+        "correct": true,
+        "answer": "+05:45",
+        "tool_calls": 1,
+        "trace": [
+          {
+            "tool": "get_current_time",
+            "args": "{\"timezone\":\"Asia/Kathmandu\"}"
+          }
+        ],
+        "input": 749,
+        "output": 30,
+        "cache_read": 0,
+        "cache_write": 0,
+        "ms": 1735
+      },
+      {
+        "id": "new-year-auckland",
+        "correct": false,
+        "answer": "2027-01-02 15:00",
+        "tool_calls": 1,
+        "trace": [
+          {
+            "tool": "convert_time",
+            "args": "{\"source_timezone\":\"America/Los_Angeles\",\"time\":\"18:00\",\"target_timezone\":\"Pacific/Auckland\"}"
+          }
+        ],
+        "input": 877,
+        "output": 51,
+        "cache_read": 0,
+        "cache_write": 0,
+        "ms": 1876
+      },
+      {
+        "id": "uk-dst-end",
+        "correct": true,
+        "answer": "2026-10-25",
+        "tool_calls": 1,
+        "trace": [
+          {
+            "tool": "get_current_time",
+            "args": "{\"timezone\":\"Europe/London\"}"
+          }
+        ],
+        "input": 761,
+        "output": 38,
+        "cache_read": 0,
+        "cache_write": 0,
+        "ms": 1790
+      },
+      {
+        "id": "bavaria-holiday",
+        "correct": false,
+        "answer": "No",
+        "tool_calls": 0,
+        "trace": [],
+        "input": 339,
+        "output": 6,
+        "cache_read": 0,
+        "cache_write": 0,
+        "ms": 839
+      },
+      {
+        "id": "england-business",
+        "correct": false,
+        "answer": "2027-01-05",
+        "tool_calls": 1,
+        "trace": [
+          {
+            "tool": "get_current_time",
+            "args": "{\"timezone\":\"Europe/London\"}"
+          }
+        ],
+        "input": 777,
+        "output": 38,
+        "cache_read": 0,
+        "cache_write": 0,
+        "ms": 1706
+      },
+      {
+        "id": "us-december",
+        "correct": true,
+        "answer": "22",
+        "tool_calls": 1,
+        "trace": [
+          {
+            "tool": "get_current_time",
+            "args": "{\"timezone\":\"America/New_York\"}"
+          }
+        ],
+        "input": 783,
+        "output": 34,
+        "cache_read": 0,
+        "cache_write": 0,
+        "ms": 1667
+      },
+      {
+        "id": "weekday",
+        "correct": true,
+        "answer": "Sunday",
+        "tool_calls": 0,
+        "trace": [],
+        "input": 338,
+        "output": 6,
+        "cache_read": 0,
+        "cache_write": 0,
+        "ms": 871
+      },
+      {
+        "id": "iso-week",
+        "correct": true,
+        "answer": "53",
+        "tool_calls": 1,
+        "trace": [
+          {
+            "tool": "get_current_time",
+            "args": "{\"timezone\":\"UTC\"}"
+          }
+        ],
+        "input": 759,
+        "output": 27,
+        "cache_read": 0,
+        "cache_write": 0,
+        "ms": 1807
+      },
+      {
+        "id": "month-end",
+        "correct": true,
+        "answer": "2027-02-28",
+        "tool_calls": 0,
+        "trace": [],
+        "input": 347,
+        "output": 18,
+        "cache_read": 0,
+        "cache_write": 0,
+        "ms": 851
+      },
+      {
+        "id": "meeting",
+        "correct": false,
+        "answer": "13:00",
+        "tool_calls": 6,
+        "trace": [
+          {
+            "tool": "convert_time",
+            "args": "{\"source_timezone\": \"America/New_York\", \"time\": \"09:00\", \"target_timezone\": \"UTC\"}"
+          },
+          {
+            "tool": "convert_time",
+            "args": "{\"source_timezone\": \"America/New_York\", \"time\": \"17:00\", \"target_timezone\": \"UTC\"}"
+          },
+          {
+            "tool": "convert_time",
+            "args": "{\"source_timezone\": \"Europe/London\", \"time\": \"08:00\", \"target_timezone\": \"UTC\"}"
+          },
+          {
+            "tool": "convert_time",
+            "args": "{\"source_timezone\": \"Europe/London\", \"time\": \"18:00\", \"target_timezone\": \"UTC\"}"
+          },
+          {
+            "tool": "convert_time",
+            "args": "{\"source_timezone\": \"Europe/Berlin\", \"time\": \"09:00\", \"target_timezone\": \"UTC\"}"
+          },
+          {
+            "tool": "convert_time",
+            "args": "{\"source_timezone\": \"Europe/Berlin\", \"time\": \"17:00\", \"target_timezone\": \"UTC\"}"
+          }
+        ],
+        "input": 434,
+        "output": 200,
+        "cache_read": 1152,
+        "cache_write": 0,
+        "ms": 2133
+      }
+    ]
+  },
+  "summary": {
+    "ours": {
+      "tasks": 13,
+      "correct": 13,
+      "tokens_in": 24880,
+      "tokens_out": 573,
+      "cached_share": 0.046,
+      "tool_calls": 14,
+      "median_ms": 1950
+    },
+    "competitor": {
+      "tasks": 13,
+      "correct": 8,
+      "tokens_in": 9843,
+      "tokens_out": 565,
+      "cached_share": 0.117,
+      "tool_calls": 15,
+      "median_ms": 1735
+    }
+  }
+}

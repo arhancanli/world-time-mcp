@@ -1,0 +1,102 @@
+# Publishes this server when a tag v<version> is pushed. npm gets a provenance attestation through
+# trusted publishing (this job's GitHub OIDC token; no npm token is stored; one-time setting on
+# npmjs.com: Trusted Publisher, GitHub Actions, this repository, workflow release.yml). The MCP
+# Registry entry uses the same OIDC token. The Claude Desktop bundle is built from the tagged
+# files, signed with a Sigstore build-provenance attestation and attached to the GitHub release.
+#
+# Verify a bundle: gh attestation verify <file>.mcpb --repo <this repository>
+name: Release
+
+on:
+  push:
+    tags: ["v[0-9]+.[0-9]+.[0-9]+"]
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: release
+    permissions:
+      contents: write
+      id-token: write
+      attestations: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+          cache: npm
+          cache-dependency-path: npm-shrinkwrap.json
+      - name: The tag, package.json, server.json and the bundle manifest name one version
+        id: v
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          for f in package.json server.json mcpb/manifest.json; do
+            test "$version" = "$(node -p "require('./$f').version")" || { echo "$f version differs from tag $GITHUB_REF_NAME"; exit 1; }
+          done
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "name=$(node -p "require('./package.json').name")" >> "$GITHUB_OUTPUT"
+      - run: npm ci --ignore-scripts
+      - run: npm audit --audit-level=high
+      - run: npm test
+      - name: Publish to npm with provenance
+        env:
+          NAME: ${{ steps.v.outputs.name }}
+          VERSION: ${{ steps.v.outputs.version }}
+        run: |
+          if npm view "$NAME@$VERSION" version >/dev/null 2>&1; then
+            echo "$NAME@$VERSION is already on npm; not publishing again"
+          else
+            npm publish --provenance --access public
+          fi
+          for attempt in $(seq 1 30); do
+            npm view "$NAME@$VERSION" version >/dev/null 2>&1 && exit 0
+            sleep 10
+          done
+          echo "npm did not serve $VERSION within 5 minutes" >&2; exit 1
+      - name: Publish to the MCP Registry
+        env:
+          PUBLISHER_URL: https://github.com/modelcontextprotocol/registry/releases/download/v1.8.1/mcp-publisher_linux_amd64.tar.gz
+          PUBLISHER_SHA256: a06c9096dcb9727c13555b6be26c7effa707b01f06a4c561ba7a3635443cf2cc
+        run: |
+          curl -fsSL -o /tmp/mcp-publisher.tar.gz "$PUBLISHER_URL"
+          echo "$PUBLISHER_SHA256  /tmp/mcp-publisher.tar.gz" | sha256sum -c -
+          tar xzf /tmp/mcp-publisher.tar.gz -C /tmp mcp-publisher
+          /tmp/mcp-publisher login github-oidc
+          /tmp/mcp-publisher publish
+      - name: Build the Claude Desktop bundle from the tagged files
+        env:
+          NAME: ${{ steps.v.outputs.name }}
+          VERSION: ${{ steps.v.outputs.version }}
+        run: |
+          stage="$(mktemp -d)"
+          files="src package.json npm-shrinkwrap.json LICENSE README.md mcpb/manifest.json"
+          [ -f mcpb/icon.png ] && files="$files mcpb/icon.png"
+          git archive HEAD $files | tar -x -C "$stage"
+          mv "$stage"/mcpb/* "$stage"/ && rmdir "$stage/mcpb"
+          (cd "$stage" && npm ci --omit=dev --ignore-scripts --silent)
+          mkdir -p dist
+          npx --yes @anthropic-ai/mcpb@2.1.2 validate "$stage/manifest.json"
+          npx --yes @anthropic-ai/mcpb@2.1.2 pack "$stage" "dist/$NAME-$VERSION.mcpb"
+          (cd dist && sha256sum *.mcpb > SHA256SUMS.txt)
+      - id: attest
+        uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
+        with:
+          subject-path: dist/*.mcpb
+      - name: Create the GitHub release with the signed bundle
+        env:
+          BUNDLE: ${{ steps.attest.outputs.bundle-path }}
+          NAME: ${{ steps.v.outputs.name }}
+          VERSION: ${{ steps.v.outputs.version }}
+        run: |
+          cp "$BUNDLE" "dist/$NAME-$VERSION.mcpb.sigstore.json"
+          gh release view "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 \
+            || gh release create "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" --title "$NAME $VERSION" --notes-file CHANGELOG.md
+          gh release upload "$GITHUB_REF_NAME" dist/* --clobber --repo "$GITHUB_REPOSITORY"

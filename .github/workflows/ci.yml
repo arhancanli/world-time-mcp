@@ -1,0 +1,42 @@
+# Tests every push to main and every pull request on each Node line the server supports: its golden
+# tests on recorded upstream responses, a dependency audit, and the packed npm tarball installing
+# from its shrinkwrap and answering initialize over real stdio.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions: read-all
+
+jobs:
+  test:
+    name: Node ${{ matrix.node }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    strategy:
+      matrix:
+        node: [20, 22, 24]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+          cache-dependency-path: npm-shrinkwrap.json
+      - run: npm ci --ignore-scripts
+      - run: npm audit --audit-level=high
+      - run: npm test
+      - name: The packed tarball installs from its shrinkwrap and answers initialize
+        run: |
+          name="$(node -p "require('./package.json').name")"
+          npm pack --silent --pack-destination /tmp
+          mkdir -p /tmp/smoke && tar xzf /tmp/"$name"-*.tgz -C /tmp/smoke
+          cd /tmp/smoke/package
+          npm ci --omit=dev --ignore-scripts --no-audit --no-fund
+          printf '%s\n' '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"ci","version":"1"}}}' \
+            | timeout 20 node src/server.mjs | grep -q '"serverInfo"'

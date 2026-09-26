@@ -1,0 +1,67 @@
+{
+  "manifest_version": "0.3",
+  "name": "world-time-mcp",
+  "display_name": "World Time",
+  "version": "0.1.0",
+  "description": "Time and calendar answers agents get wrong: the time anywhere by city, country or zone, DST-safe conversions that flag skipped and repeated hours, public holidays for 200+ countries and their regions, business-day arithmetic with each country's own weekend, and meeting slots across time zones. Works offline, no key.",
+  "author": {
+    "name": "Arhan Canli",
+    "url": "https://github.com/arhancanli"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arhancanli/world-time-mcp"
+  },
+  "homepage": "https://github.com/arhancanli/world-time-mcp#readme",
+  "documentation": "https://github.com/arhancanli/world-time-mcp#readme",
+  "support": "https://github.com/arhancanli/world-time-mcp/issues",
+  "license": "MIT",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "mcp-server",
+    "productivity"
+  ],
+  "server": {
+    "type": "node",
+    "entry_point": "src/server.mjs",
+    "mcp_config": {
+      "command": "node",
+      "args": [
+        "${__dirname}/src/server.mjs"
+      ]
+    }
+  },
+  "tools": [
+    {
+      "name": "business_days",
+      "description": "Add or count business days"
+    },
+    {
+      "name": "date_info",
+      "description": "Facts and arithmetic for a date"
+    },
+    {
+      "name": "holidays",
+      "description": "Public holidays"
+    },
+    {
+      "name": "meeting_slots",
+      "description": "Find meeting times across time zones"
+    },
+    {
+      "name": "world_time",
+      "description": "Time in places, now or converted"
+    }
+  ],
+  "compatibility": {
+    "platforms": [
+      "darwin",
+      "win32",
+      "linux"
+    ],
+    "runtimes": {
+      "node": ">=20"
+    }
+  }
+}
