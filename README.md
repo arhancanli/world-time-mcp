@@ -210,7 +210,7 @@ off, and some holidays move.
 - [Cron Check](https://github.com/arhancanli/cron-check-mcp): Explains cron expressions, lists next run times in any time zone, converts between cron dialects.
 - [Domain Health](https://github.com/arhancanli/domain-health-mcp): Email and domain checks: SPF lookup limits, DKIM keys, DMARC, DNS records, registration expiry.
 - [Drug Label](https://github.com/arhancanli/drug-label-mcp): FDA drug label answers with section citations, RxNorm name resolution, recalls and shortages.
-- [The whole collection](https://github.com/arhancanli/mcp-factory#servers), 8 more
+- [The whole collection](https://github.com/arhancanli/mcp-factory#servers), 9 more
 <!-- family:end -->
 
 ## License
